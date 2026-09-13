@@ -1,32 +1,24 @@
-# ZIP → APK Builder — fixed
+# ZIP → APK Builder — Fixed
 
-Versi ini memperbaiki error routing Express 5 dan disiapkan untuk server yang mempunyai Java + Android SDK.
+## Kenapa error JSON sebelumnya?
+Frontend lama langsung menjalankan `response.json()`. Saat Vercel mengembalikan halaman/error teks, browser mencoba membaca teks tersebut sebagai JSON sehingga muncul `Unexpected token ... is not valid JSON`. Frontend versi ini membaca respons dengan aman dan menampilkan error server sebenarnya.
 
-## Penting: jangan deploy backend Gradle ke Vercel
-Vercel cocok untuk frontend/serverless API ringan, bukan sebagai environment Android SDK untuk menjalankan Gradle. Deploy project ini sebagai **Docker/Web Service** (contohnya Render) atau VPS yang punya Docker.
+## Arsitektur yang benar
+**Frontend** boleh di Vercel. **Backend build APK** harus berjalan di Docker/Web Service/VPS yang memiliki Java, Android SDK dan Gradle. Jangan menjalankan proses Gradle/Android SDK di Vercel Serverless.
 
-## Lokal
-Kebutuhan: Docker Desktop.
-```bash
-docker build -t zip-apk-builder .
-docker run --rm -p 3000:3000 zip-apk-builder
+## Backend
+- Node.js 20+
+- Dockerfile sudah disediakan
+- Java + Android SDK
+- POST `/api/build`
+- GET `/health`
+
+## Frontend
+Edit `public/config.js` jika backend berada di domain berbeda:
+```js
+window.BUILDER_API_URL = "https://DOMAIN-BACKEND-KAMU";
 ```
-Buka `http://localhost:3000`.
+Jika frontend dan backend satu server, biarkan kosong.
 
-## Render
-1. Push folder ini ke GitHub.
-2. Buat Web Service dari repository.
-3. Pilih Docker.
-4. Deploy.
-`render.yaml` sudah disediakan sebagai contoh konfigurasi.
-
-## Yang didukung
-- Android/Gradle project dengan `gradlew` / `gradlew.bat`
-- Nama aplikasi
-- Package name
-- Icon PNG/JPG/WEBP
-- Build `assembleDebug`
-- Download APK
-
-## Catatan keamanan production
-Jalankan build di container terisolasi, beri CPU/RAM/timeout limit, rate limit dan authentication. Jangan menjalankan ZIP pengguna dengan hak root atau akses ke secret server.
+## Catatan project
+ZIP harus berupa project Android/Gradle yang mempunyai `gradlew` atau `gradlew.bat`. Flutter/React Native/Capacitor/Unity membutuhkan adapter build masing-masing.
