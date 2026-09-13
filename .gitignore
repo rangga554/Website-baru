@@ -1,0 +1,14 @@
+# === Browser Cache & Temp File ===
+.DS_Store
+Thumbs.db
+*.log
+
+# === Editor ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# === OS ===
+desktop.ini
