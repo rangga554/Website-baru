@@ -16,7 +16,7 @@ Frontend lama langsung menjalankan `response.json()`. Saat Vercel mengembalikan 
 ## Frontend
 Edit `public/config.js` jika backend berada di domain berbeda:
 ```js
-window.BUILDER_API_URL = "https://DOMAIN-BACKEND-KAMU";
+window.BUILDER_API_URL = "https://zip-to-apk-mastercode.vercel.app/";
 ```
 Jika frontend dan backend satu server, biarkan kosong.
 
