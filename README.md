@@ -1,34 +1,26 @@
-# 🎮 Minecraft 2D — RANTAX Edition
-> Game sandbox 2D mirip Minecraft, dibuat dengan HTML + CSS + JavaScript murni.
-> **Tidak butuh Sketchware! Langsung buka di browser!**
+# ZIP → APK Builder
 
-## ✨ Fitur
-- 🧱 **Pasang Block** → Klik 1x
-- ⛏️ **Hapus Block** → Klik Kanan
-- 🧱 **9 Jenis Block**: Rumput, Tanah, Batu, Kayu, Daun, Air, Pasir, Bedrock
-- 💾 **Simpan Dunia** → Otomatis tersimpan di browser
-- 📂 **Muat Dunia** → Kembalikan kapan saja
-- 🗑️ **Reset Dunia** → Kembali ke alam asli
-- 📍 **Koordinat Real-time**
-- 🛡️ **Bedrock tidak bisa dihapus**
+## Kebutuhan server
+- Node.js 20+
+- Java JDK 17+ (sesuai project Android)
+- Project ZIP harus merupakan project Android/Gradle yang memiliki `gradlew`/`gradlew.bat`.
+- Linux server: `unzip`, Android SDK/Build Tools yang sesuai project.
 
-## 🚀 Cara Main
-1. Download / Clone repo ini
-2. Buka file `index.html` di browser apa saja (Chrome, Firefox, Edge, dll)
-3. Selesai! Langsung main! 🎉
+## Jalankan
+```bash
+npm install
+npm start
+```
+Buka `http://localhost:3000`.
 
-## 🎮 Kontrol
-| Aksi | Cara |
-|---|---|
-| Pasang Block | Klik kiri pada posisi |
-| Hapus Block | Klik kanan pada block |
-| Pilih Block | Klik block di tas di bawah |
-| Simpan Dunia | Tekan tombol 💾 |
-| Muat Dunia | Tekan tombol 📂 |
-| Reset Dunia | Tekan tombol 🗑️ |
+## Fitur
+- Upload ZIP
+- Nama aplikasi
+- Package name
+- Upload icon
+- Build `assembleDebug`
+- Download APK
 
-## 📜 Lisensi
-MIT License — bebas dipakai & dimodifikasi, sebutkan sumbernya.
-
----
-💜 Dibuat oleh **RANTAX TEAM** — 2026
+## Catatan
+Patch package/icon paling aman untuk project Android standar. Project Flutter, React Native, Capacitor, Unity, atau project web harus diberi adapter build tersendiri.
+Untuk production, tambahkan authentication, job queue, batas resource, sandbox/container, antivirus/scanning, dan cleanup build.
