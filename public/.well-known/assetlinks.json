@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.mastercode",
+    "sha256_cert_fingerprints": [
+      "F7:81:92:85:9C:5B:B1:34:19:68:4F:37:27:D2:1A:2E:EB:D7:16:CD:33:56:61:11:80:5E:AF:5B:54:47:D9:74"
+    ]
+  }
+}]
