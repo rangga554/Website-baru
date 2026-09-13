@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Accent normal KRYNOS (biru) — dipakai lewat class Tailwind
+     text-accent/bg-accent/border-accent di seluruh app. */
+  --accent-rgb: 139 92 246; /* KRYNOS violet #8b5cf6 */
+}
+
+/* Ditoggle di <html> oleh components/EventStatusProvider.tsx pas Event
+   Kemerdekaan aktif — accent seluruh app otomatis jadi merah, tanpa perlu
+   ubah satu-satu komponen yang pakai class accent. */
+html.event-theme {
+  --accent-rgb: 220 38 38; /* merah #dc2626, senada sama banner & bunting */
+}
+
+html, body {
+  height: 100%;
+  background-color: #080b14;
+  color: #eef2ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+
+/* KRYNOS visual system — dark violet/cyan, glass panels, subtle glow. */
+:root {
+  --krynos-violet: #8b5cf6;
+  --krynos-cyan: #22d3ee;
+  --krynos-bg: #080b14;
+  --krynos-panel: #0f1422;
+}
+body {
+  background:
+    radial-gradient(circle at 15% -10%, rgba(139,92,246,.16), transparent 32rem),
+    radial-gradient(circle at 90% 0%, rgba(34,211,238,.10), transparent 28rem),
+    #080b14;
+}
+.bg-panel {
+  background: rgba(15,20,34,.86);
+  backdrop-filter: blur(12px);
+}
+.border-border { border-color: rgba(148,163,184,.14); }
+button, a { -webkit-tap-highlight-color: transparent; }
+
+/* scrollbar tipis biar rapi di semua ukuran layar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 8px;
+}
+
+/* Monaco editor container harus fleksibel penuh di mobile */
+.editor-wrapper {
+  height: calc(100dvh - 96px);
+}
+@media (max-width: 767px) {
+  .editor-wrapper {
+    height: calc(100dvh - 140px);
+  }
+}
+
+/* ============================================================================
+   SITE INSPECTOR — semua class di bawah ini SENGAJA di-prefix ".si-scope"
+   biar keisolasi total, gak nabrak class Tailwind/KRYNOS yang lain.
+   ============================================================================ */
+.si-scope {
+  --si-bg: #0b1220;
+  --si-panel: #111a2b;
+  --si-panel-raised: #16223a;
+  --si-border: #223049;
+  --si-text: #e8ecf1;
+  --si-text-secondary: #7f8fa6;
+  --si-accent: #5eead4;
+  --si-accent-dim: #5eead422;
+  --si-warning: #f5a623;
+  --si-error: #f0546b;
+  --si-radius: 10px;
+
+  background: var(--si-bg);
+  color: var(--si-text);
+  min-height: 100dvh;
+  background-image:
+    linear-gradient(180deg, rgba(94,234,212,0.04) 0%, transparent 12%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px);
+}
+.si-scope * { box-sizing: border-box; }
+.si-scope code, .si-scope .mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+.si-scope a { color: var(--si-accent); }
+.si-scope ::selection { background: var(--si-accent); color: #06181a; }
+.si-scope ::-webkit-scrollbar { width: 8px; height: 8px; }
+.si-scope ::-webkit-scrollbar-track { background: var(--si-bg); }
+.si-scope ::-webkit-scrollbar-thumb { background: var(--si-border); border-radius: 4px; }
+
+.si-scope .container { max-width: 1180px; margin: 0 auto; padding: 24px 16px 80px; }
+
+.si-scope .topbar { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+.si-scope .logo-mark {
+  width: 34px; height: 34px; border: 1.5px solid var(--si-accent); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center; color: var(--si-accent);
+  font-family: ui-monospace, monospace; font-weight: 700; font-size: 14px;
+  position: relative; overflow: hidden;
+}
+.si-scope .logo-mark::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(94,234,212,0.35) 50%, transparent 100%);
+  animation: si-scanmove 2.4s linear infinite;
+}
+@keyframes si-scanmove { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+
+.si-scope .brand-name { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+.si-scope .brand-tag { font-family: ui-monospace, monospace; font-size: 11px; color: var(--si-text-secondary); }
+
+.si-scope .scan-panel { background: var(--si-panel); border: 1px solid var(--si-border); border-radius: var(--si-radius); padding: 18px; }
+.si-scope .scan-input-row { display: flex; gap: 10px; }
+.si-scope .scan-input {
+  flex: 1; background: #0d1524; border: 1px solid var(--si-border); color: var(--si-text);
+  border-radius: 8px; padding: 13px 14px; font-family: ui-monospace, monospace; font-size: 14px;
+  outline: none; transition: border-color 0.15s ease;
+}
+.si-scope .scan-input::placeholder { color: #4a5a72; }
+.si-scope .scan-input:focus { border-color: var(--si-accent); }
+.si-scope .scan-btn {
+  background: var(--si-accent); color: #06181a; border: none; border-radius: 8px; padding: 0 22px;
+  font-family: ui-monospace, monospace; font-weight: 700; font-size: 13px; letter-spacing: 0.02em;
+  cursor: pointer; transition: filter 0.15s ease, transform 0.1s ease;
+}
+.si-scope .scan-btn:hover:not(:disabled) { filter: brightness(1.1); }
+.si-scope .scan-btn:active:not(:disabled) { transform: scale(0.98); }
+.si-scope .scan-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.si-scope .progress-track { height: 4px; background: var(--si-border); border-radius: 2px; overflow: hidden; margin-top: 14px; }
+.si-scope .progress-fill { height: 100%; background: var(--si-accent); transition: width 0.3s ease; box-shadow: 0 0 8px var(--si-accent); }
+
+.si-scope .terminal-log { margin-top: 14px; font-family: ui-monospace, monospace; font-size: 12.5px; line-height: 1.9; max-height: 220px; overflow-y: auto; }
+.si-scope .terminal-line { color: var(--si-text-secondary); display: flex; gap: 8px; }
+.si-scope .terminal-line.done { color: var(--si-accent); }
+.si-scope .terminal-line.pending { color: #4a5a72; }
+.si-scope .terminal-line .glyph { width: 14px; flex-shrink: 0; }
+
+.si-scope .section-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 18px; }
+.si-scope .card { background: var(--si-panel); border: 1px solid var(--si-border); border-radius: var(--si-radius); padding: 16px; transition: border-color 0.15s ease; }
+.si-scope .card:hover { border-color: #2e4262; }
+.si-scope .card.wide { grid-column: 1 / -1; }
+.si-scope .card-title {
+  font-size: 12px; font-family: ui-monospace, monospace; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--si-text-secondary); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;
+}
+
+.si-scope .kv-row { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-bottom: 1px solid rgba(34,48,73,0.5); font-size: 13px; }
+.si-scope .kv-row:last-child { border-bottom: none; }
+.si-scope .kv-key { color: var(--si-text-secondary); }
+.si-scope .kv-val { font-family: ui-monospace, monospace; text-align: right; word-break: break-word; }
+
+.si-scope .badge {
+  display: inline-flex; align-items: center; gap: 5px; background: var(--si-accent-dim);
+  border: 1px solid rgba(94,234,212,0.3); color: var(--si-accent); font-family: ui-monospace, monospace;
+  font-size: 11.5px; padding: 4px 9px; border-radius: 6px; margin: 3px 5px 3px 0;
+}
+.si-scope .badge-wrap { display: flex; flex-wrap: wrap; }
+
+.si-scope .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+.si-scope .dot-green { background: var(--si-accent); box-shadow: 0 0 6px var(--si-accent); }
+.si-scope .dot-yellow { background: var(--si-warning); box-shadow: 0 0 6px var(--si-warning); }
+.si-scope .dot-red { background: var(--si-error); box-shadow: 0 0 6px var(--si-error); }
+
+.si-scope .live-bar { display: flex; align-items: center; gap: 8px; margin-top: 16px; padding: 8px 14px; background: var(--si-panel); border: 1px solid var(--si-border); border-radius: 8px; }
+.si-scope .live-label { font-size: 11.5px; color: var(--si-text-secondary); }
+.si-scope .live-toggle { margin-left: auto; padding: 5px 12px; font-size: 11.5px; }
+.si-scope .live-pulse { animation: si-livepulse 1.4s ease-in-out infinite; }
+@keyframes si-livepulse { 0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--si-accent); } 50% { opacity: 0.4; box-shadow: 0 0 2px var(--si-accent); } }
+
+.si-scope .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 14px; }
+.si-scope .score-circle-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.si-scope .score-label { font-family: ui-monospace, monospace; font-size: 11px; color: var(--si-text-secondary); text-transform: uppercase; letter-spacing: 0.06em; }
+
+.si-scope .header-flag { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; font-size: 12.5px; font-family: ui-monospace, monospace; border-bottom: 1px solid rgba(34,48,73,0.5); }
+.si-scope .header-flag:last-child { border-bottom: none; }
+
+.si-scope .warning-text { color: var(--si-warning); font-size: 12px; margin-top: 6px; }
+
+.si-scope .export-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+.si-scope .btn-secondary {
+  background: transparent; border: 1px solid var(--si-border); color: var(--si-text); border-radius: 8px;
+  padding: 9px 16px; font-family: ui-monospace, monospace; font-size: 12.5px; cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease; display: flex; align-items: center; gap: 6px;
+}
+.si-scope .btn-secondary:hover { border-color: var(--si-accent); color: var(--si-accent); }
+.si-scope .btn-secondary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.si-scope .empty-state { text-align: center; padding: 60px 20px; color: var(--si-text-secondary); font-family: ui-monospace, monospace; font-size: 13px; }
+
+@media (max-width: 640px) {
+  .si-scope .scan-input-row { flex-direction: column; }
+  .si-scope .scan-btn { padding: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .si-scope .logo-mark::after { animation: none; }
+  .si-scope .live-pulse { animation: none; }
+}
